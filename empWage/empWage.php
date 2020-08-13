@@ -31,13 +31,15 @@ function calculateDailyWage($empHrs){
    global $EMP_RATE_PER_HR;
     return $empHrs* $EMP_RATE_PER_HR;
 }
-
+$dailyWageRecord;
 while ($totalWorkingDays <= $MAX_WORKING_DAYS && $totalWorkingHours <= $MAX_HOURS_IN_MONTH) {
     $totalWorkingDays++;    
-$checkEmployee = mt_rand(0,2);
-$empHrs = getWorkingHours($checkEmployee);
-$totalWorkingHours += $empHrs;
+    $checkEmployee = mt_rand(0,2);
+    $empHrs = getWorkingHours($checkEmployee);
+    $dailyWageRecord[$totalWorkingDays] = calculateDailyWage($empHrs);
+    $totalWorkingHours += $empHrs;
 }
+print_r($dailyWageRecord);
 $monthlyWage = $totalWorkingHours * $EMP_RATE_PER_HR;
 echo " <br> Employee Wage for month is = $monthlyWage";
 ?>
